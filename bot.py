@@ -456,6 +456,10 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text(text)
 
         return
+
+        await query.answer()
+        return
+        
         
     if action in ["reply", "rename"]:
 

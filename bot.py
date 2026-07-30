@@ -440,10 +440,6 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     elif action == "info":
 
-        print("INFO CLICKED")
-        print("USER_ID =", user_id)
-        print("USER_INFO =", user_info.get(user_id))
-
         first_name = user_info.get(user_id, {}).get("first_name", "ندارد")
         username = user_info.get(user_id, {}).get("username")
 
@@ -457,16 +453,8 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f"ID: {user_id}"
         )
 
-        print(text)
+        await query.message.reply_text(text)
 
-        await query.answer(
-            text="تست",
-            show_alert=True
-        )
-
-        return
-
-        await query.answer()
         return
         
     if action in ["reply", "rename"]:

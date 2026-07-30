@@ -437,23 +437,17 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     elif action == "info":
 
+        print("INFO CLICKED")
+        print("USER_ID =", user_id)
+        print("USER_INFO =", user_info.get(user_id))
+
         first_name = user_info.get(user_id, {}).get("first_name", "ندارد")
-        username = user_info.get(user_id, {}).get("username")
+        print(text)
 
-        nickname = get_nickname(user_id)
-
-        text = (
-            f"👤 اطلاعات کاربر\n\n"
-            f"نام: {first_name}\n"
-            f"اسم نمایشی: {nickname}\n"
-            f"یوزرنیم: @{username if username else 'ندارد'}\n"
-            f"ID: {user_id}"
-        )
-
-        await query.answer(
-            text=text,
-            show_alert=True
-        )
+    await query.answer(
+        text="تست",
+        show_alert=True
+    )
 
         return
     elif action == "back":

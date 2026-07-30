@@ -417,7 +417,10 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     query = update.callback_query
     await query.answer()
-
+    
+    print("CALLBACK:", query.data)
+    print("ACTION:", query.data.split(":")[0])
+    
     admin_id = update.effective_user.id
     action, user_id = query.data.split(":")
     user_id = int(user_id)

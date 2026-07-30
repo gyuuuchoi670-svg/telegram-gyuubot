@@ -444,11 +444,10 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE):
         first_name = user_info.get(user_id, {}).get("first_name", "ندارد")
         print(text)
 
-    await query.answer(
-        text="تست",
-        show_alert=True
-    )
-
+        await query.answer(
+            text="تست",
+            show_alert=True
+        )
         return
     elif action == "back":
 

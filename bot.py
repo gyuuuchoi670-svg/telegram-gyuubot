@@ -445,21 +445,26 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE):
         print("USER_INFO =", user_info.get(user_id))
 
         first_name = user_info.get(user_id, {}).get("first_name", "ندارد")
+        username = user_info.get(user_id, {}).get("username")
+
+        nickname = get_nickname(user_id)
+
+        text = (
+            f"👤 اطلاعات کاربر\n\n"
+            f"نام: {first_name}\n"
+            f"اسم نمایشی: {nickname}\n"
+            f"یوزرنیم: @{username if username else 'ندارد'}\n"
+            f"ID: {user_id}"
+        )
+
         print(text)
 
         await query.answer(
             text="تست",
             show_alert=True
         )
+
         return
-    elif action == "back":
-
-        first_name = user_info.get(user_id, {}).get("first_name", "کاربر")
-        username = user_info.get(user_id, {}).get("username")
-
-        await query.message.edit_reply_markup(
-            reply_markup=get_main_keyboard(user_id, first_name, username)
-        )
 
         await query.answer()
         return

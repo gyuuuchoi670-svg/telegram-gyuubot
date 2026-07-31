@@ -183,7 +183,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 "username": username,
             }
         
-       if update.message.photo:
+        if update.message.photo:
 
             media_groups[media_group_id]["media"].append(
                 InputMediaPhoto(
@@ -370,7 +370,7 @@ def get_settings_keyboard(user_id):
             callback_data=f"block:{user_id}"
         )
 
-   return InlineKeyboardMarkup([
+    return InlineKeyboardMarkup([
         [
             InlineKeyboardButton("💬 پاسخ", callback_data=f"reply:{user_id}"),
             block_button

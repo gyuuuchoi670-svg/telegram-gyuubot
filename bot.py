@@ -370,30 +370,16 @@ def get_settings_keyboard(user_id):
             callback_data=f"block:{user_id}"
         )
 
-    return InlineKeyboardMarkup([
+   return InlineKeyboardMarkup([
         [
-            InlineKeyboardButton(
-                "💬 پاسخ",
-                callback_data=f"reply:{user_id}"
-            )
-        ],
-        [
+            InlineKeyboardButton("💬 پاسخ", callback_data=f"reply:{user_id}"),
             block_button
         ],
         [
-            InlineKeyboardButton(
-                "✏️ تغییر اسم",
-                callback_data=f"rename:{user_id}"
-            )
-        ],
-        [
-            InlineKeyboardButton(
-                "⬅️ بازگشت",
-                callback_data=f"back:{user_id}"
-            )
+            InlineKeyboardButton("✏️ تغییر اسم", callback_data=f"rename:{user_id}"),
+            InlineKeyboardButton("⬅️ بازگشت", callback_data=f"back:{user_id}")
         ]
     ])
-
 # ───────── SEND MEDIA GROUP ─────────
 async def send_media_group(media_group_id, context):
 

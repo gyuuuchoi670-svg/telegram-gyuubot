@@ -457,10 +457,17 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         return
 
-        await query.answer()
-        return
-        
-        
+    elif action == "back":
+
+        first_name = user_info.get(user_id, {}).get("first_name", "کاربر")
+        username = user_info.get(user_id, {}).get("username")
+
+        await query.message.edit_reply_markup(
+            reply_markup=get_main_keyboard(user_id, first_name, username)
+        )
+
+    await query.answer()
+    return
     if action in ["reply", "rename"]:
 
         pending_action[admin_id] = {

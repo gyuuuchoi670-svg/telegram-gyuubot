@@ -182,13 +182,13 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 "first_name": first_name,
                 "username": username,
             }
-
-        if update.message.photo:
+        
+       if update.message.photo:
 
             media_groups[media_group_id]["media"].append(
                 InputMediaPhoto(
                     media=update.message.photo[-1].file_id,
-                    caption=None
+                    caption=user_caption if len(media_groups[media_group_id]["media"]) == 0 else None
                 )
             )
 
@@ -197,7 +197,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             media_groups[media_group_id]["media"].append(
                 InputMediaVideo(
                     media=update.message.video.file_id,
-                    caption=None
+                    caption=user_caption if len(media_groups[media_group_id]["media"]) == 0 else None
                 )
             )
 
@@ -409,7 +409,7 @@ async def send_media_group(media_group_id, context):
 
             await context.bot.send_message(
                 chat_id=admin,
-                text=data["caption"] if data["caption"] else "📁 آلبوم",
+                text="⚙️ تنظیمات",
                 reply_markup=keyboard
             )
 

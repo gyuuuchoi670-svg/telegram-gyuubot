@@ -469,8 +469,8 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.edit_reply_markup(
             reply_markup=get_main_keyboard(user_id, display_name, username)
         )
-    await query.answer()
-    return
+        await query.answer()
+        return
     if action in ["reply", "rename"]:
 
         pending_action[admin_id] = {

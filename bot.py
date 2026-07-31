@@ -148,6 +148,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     first_name = update.effective_user.first_name
     nickname = get_nickname(user_id)
+    display_name = nickname if nickname != "ثبت نشده" else first_name
 
     username = update.effective_user.username
     user_info[user_id] = {
@@ -164,7 +165,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
     user_caption = update.message.caption or ""
 
-    keyboard = get_main_keyboard(user_id, first_name, username)
+    keyboard = get_main_keyboard(user_id, display_name, username)
 
     # ───────── MEDIA GROUP ─────────
     if update.message.media_group_id:
@@ -461,11 +462,13 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         first_name = user_info.get(user_id, {}).get("first_name", "کاربر")
         username = user_info.get(user_id, {}).get("username")
+        nickname = get_nickname(user_id)
+
+        display_name = nickname if nickname != "ثبت نشده" else first_name
 
         await query.message.edit_reply_markup(
-            reply_markup=get_main_keyboard(user_id, first_name, username)
+            reply_markup=get_main_keyboard(user_id, display_name, username)
         )
-
     await query.answer()
     return
     if action in ["reply", "rename"]:
@@ -487,9 +490,12 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         first_name = user_info.get(user_id, {}).get("first_name", "کاربر")
         username = user_info.get(user_id, {}).get("username")
+        nickname = get_nickname(user_id)
+
+        display_name = nickname if nickname != "ثبت نشده" else first_name
 
         await query.message.edit_reply_markup(
-            reply_markup=get_main_keyboard(user_id, first_name, username)
+            reply_markup=get_main_keyboard(user_id, display_name, username)
         )
 
         await query.answer("🚫 کاربر بلاک شد", show_alert=True)
@@ -501,9 +507,12 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         first_name = user_info.get(user_id, {}).get("first_name", "کاربر")
         username = user_info.get(user_id, {}).get("username")
+        nickname = get_nickname(user_id)
+
+        display_name = nickname if nickname != "ثبت نشده" else first_name
 
         await query.message.edit_reply_markup(
-            reply_markup=get_main_keyboard(user_id, first_name, username)
+            reply_markup=get_main_keyboard(user_id, display_name, username)
         )
 
         await query.answer("✅ کاربر آنبلاک شد", show_alert=True)

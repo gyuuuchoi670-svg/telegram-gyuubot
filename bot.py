@@ -358,19 +358,39 @@ def get_main_keyboard(user_id, first_name, username):
 
 
 def get_settings_keyboard(user_id):
+
+    if is_blocked(user_id):
+        block_button = InlineKeyboardButton(
+            "✅ آنبلاک",
+            callback_data=f"unblock:{user_id}"
+        )
+    else:
+        block_button = InlineKeyboardButton(
+            "🚫 بلاک",
+            callback_data=f"block:{user_id}"
+        )
+
     return InlineKeyboardMarkup([
         [
-            InlineKeyboardButton("💬 پاسخ", callback_data=f"reply:{user_id}")
+            InlineKeyboardButton(
+                "💬 پاسخ",
+                callback_data=f"reply:{user_id}"
+            )
         ],
         [
-            InlineKeyboardButton("🚫 بلاک", callback_data=f"block:{user_id}"),
-            InlineKeyboardButton("✅ آنبلاک", callback_data=f"unblock:{user_id}")
+            block_button
         ],
         [
-            InlineKeyboardButton("✏️ تغییر اسم", callback_data=f"rename:{user_id}")
+            InlineKeyboardButton(
+                "✏️ تغییر اسم",
+                callback_data=f"rename:{user_id}"
+            )
         ],
         [
-            InlineKeyboardButton("⬅️ بازگشت", callback_data=f"back:{user_id}")
+            InlineKeyboardButton(
+                "⬅️ بازگشت",
+                callback_data=f"back:{user_id}"
+            )
         ]
     ])
 
@@ -495,7 +515,7 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE):
         display_name = nickname if nickname != "ثبت نشده" else first_name
 
         await query.message.edit_reply_markup(
-            reply_markup=get_main_keyboard(user_id, display_name, username)
+            reply_markup=get_settings_keyboard(user_id)
         )
 
         await query.answer("🚫 کاربر بلاک شد", show_alert=True)
@@ -512,7 +532,7 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE):
         display_name = nickname if nickname != "ثبت نشده" else first_name
 
         await query.message.edit_reply_markup(
-            reply_markup=get_main_keyboard(user_id, display_name, username)
+            reply_markup=get_settings_keyboard(user_id)
         )
 
         await query.answer("✅ کاربر آنبلاک شد", show_alert=True)
